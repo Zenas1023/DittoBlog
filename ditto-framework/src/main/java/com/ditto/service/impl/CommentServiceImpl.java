@@ -1,5 +1,7 @@
 package com.ditto.service.impl;
 
+import com.alibaba.excel.util.DateUtils;
+import com.aliyun.oss.common.utils.DateUtil;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
@@ -15,6 +17,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -40,7 +43,30 @@ public class CommentServiceImpl extends ServiceImpl<CommentMapper, Comment> impl
         page(page, queryWrapper);
 
         List<CommentVo> commentVoList = toCommentVoList(page.getRecords());
+        //查询所有根评论对应的子评论集合，并且赋值给对应的属性
+        for (CommentVo commentVo : commentVoList) {
+            //查询对应的子评论
+            List<CommentVo> children = getChildren(commentVo.getId());
+            //赋值
+            commentVo.setChildren(children);
+        }
         return ResponseResult.okResult(new PageVo(commentVoList,page.getTotal()));
+    }
+
+    /**
+     * 根据根评论的id查询所对应的子评论的集合
+     * @param id 根评论的id
+     * @return
+     */
+    private List<CommentVo> getChildren(Long id) {
+
+        LambdaQueryWrapper<Comment> queryWrapper = new LambdaQueryWrapper<>();
+        queryWrapper.eq(Comment::getRootId,id);
+        queryWrapper.orderByAsc(Comment::getCreateTime);
+        List<Comment> comments = list(queryWrapper);
+
+        List<CommentVo> commentVos = toCommentVoList(comments);
+        return commentVos;
     }
 
     private List<CommentVo> toCommentVoList(List<Comment> list){
