@@ -1,6 +1,7 @@
 package com.ditto.domain.vo;
 
 import com.baomidou.mybatisplus.annotation.TableId;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -25,6 +26,7 @@ public class CommentVo {
     //回复目标评论id
     private Long toCommentId;
     private Long createBy;
+    @JsonFormat(timezone = "GMT+8", pattern = "yyyy-MM-dd HH:mm:ss")
     private Date createTime;
     private String username;
     private List<CommentVo> children;
