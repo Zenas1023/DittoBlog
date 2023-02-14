@@ -9,12 +9,16 @@ import com.ditto.domain.ResponseResult;
 import com.ditto.domain.entity.Comment;
 import com.ditto.domain.vo.CommentVo;
 import com.ditto.domain.vo.PageVo;
+import com.ditto.enums.AppHttpCodeEnum;
+import com.ditto.exception.SystemException;
 import com.ditto.mapper.CommentMapper;
 import com.ditto.service.CommentService;
 import com.ditto.service.UserService;
 import com.ditto.utils.BeanCopyUtils;
+import com.ditto.utils.SecurityUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
 
 import javax.annotation.Resource;
 import java.util.Date;
@@ -84,6 +88,16 @@ public class CommentServiceImpl extends ServiceImpl<CommentMapper, Comment> impl
             }
         }
         return commentVos;
+    }
+
+    @Override
+    public ResponseResult<?> addComment(Comment comment) {
+        //评论内容不能为空
+        if(!StringUtils.hasText(comment.getContent())){
+            throw new SystemException(AppHttpCodeEnum.CONTENT_NOT_NULL);
+        }
+        save(comment);
+        return ResponseResult.okResult();
     }
 }
 
