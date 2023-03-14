@@ -38,7 +38,7 @@ public class UploadController {
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);
         headers.setAccept(Collections.singletonList(MediaType.APPLICATION_JSON));
-        headers.set("Authorization", "token " + "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");
+        headers.set("Authorization", "token " + "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");
         String encodedContent = Base64.getEncoder().encodeToString(img.getBytes());
         String body = String.format("{\"message\": \"Adding %s\", \"content\": \"%s\"}", filePath, encodedContent);
         HttpEntity<String> entity = new HttpEntity<>(body, headers);
