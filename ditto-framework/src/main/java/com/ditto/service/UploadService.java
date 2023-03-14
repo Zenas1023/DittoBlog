@@ -8,5 +8,7 @@ import java.io.IOException;
 
 public interface UploadService {
 
-    void upload(MultipartFile img) throws IOException;
+    void upload(MultipartFile img,String filePath) throws IOException;
+
+    void uploadFileToGithub(MultipartFile img) throws IOException;
 }
