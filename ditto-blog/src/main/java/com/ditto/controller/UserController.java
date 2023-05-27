@@ -1,5 +1,6 @@
 package com.ditto.controller;
 
+import com.ditto.annotation.SystemLog;
 import com.ditto.domain.ResponseResult;
 import com.ditto.domain.entity.User;
 import com.ditto.service.UserService;
@@ -18,6 +19,7 @@ public class UserController {
         return userService.userInfo();
     }
     @PutMapping("/userInfo")
+    @SystemLog(businessName = "更新用户信息")
     public ResponseResult<?> updateUserInfo(@RequestBody User user){
         return userService.updateUserInfo(user);
     }
