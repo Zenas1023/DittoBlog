@@ -15,6 +15,7 @@ import com.ditto.mapper.ArticleMapper;
 import com.ditto.service.ArticleService;
 import com.ditto.service.CategoryService;
 import com.ditto.utils.BeanCopyUtils;
+import com.ditto.utils.RedisCache;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -26,6 +27,8 @@ import java.util.stream.Collectors;
 public class ArticleServiceImpl extends ServiceImpl<ArticleMapper, Article> implements ArticleService {
     @Resource
     private CategoryService categoryService;
+    @Resource
+    private RedisCache redisCache;
 
     @Override
     public ResponseResult<?> hotArticleList() {
@@ -100,5 +103,11 @@ public class ArticleServiceImpl extends ServiceImpl<ArticleMapper, Article> impl
         }
         //封装响应返回
         return ResponseResult.okResult(articleDetailVo);
+    }
+
+    @Override
+    public ResponseResult updateViewAccount(Long id) {
+        redisCache.incrementCacheMapValue("article:viewCount", String.valueOf(id),1);
+        return ResponseResult.okResult();
     }
 }

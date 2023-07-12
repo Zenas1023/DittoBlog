@@ -3,10 +3,7 @@ package com.ditto.controller;
 import com.ditto.domain.ResponseResult;
 import com.ditto.domain.entity.Article;
 import com.ditto.service.ArticleService;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import java.util.List;
@@ -27,5 +24,9 @@ public class ArticleController {
     @GetMapping("/{id}")
     public ResponseResult<?> getArticleDetail(@PathVariable("id") Long id){
         return articleService.getArticleDetail(id);
+    }
+    @PutMapping("/updateViewCount/{id}")
+    public ResponseResult updateViewAccount(@PathVariable("id") Long id){
+        return articleService.updateViewAccount(id);
     }
 }
