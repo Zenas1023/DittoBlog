@@ -3,15 +3,14 @@ package com.ditto;
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.scheduling.annotation.EnableScheduling;
-import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
+/**
+ * @Author 三更  B站： https://space.bilibili.com/663528522
+ */
 @SpringBootApplication
 @MapperScan("com.ditto.mapper")
-@EnableScheduling
-@EnableSwagger2
-public class DittoBlogApplication {
+public class BlogAdminApplication {
     public static void main(String[] args) {
-        SpringApplication.run(DittoBlogApplication.class,args);
+        SpringApplication.run(BlogAdminApplication.class, args);
     }
 }

@@ -2,7 +2,9 @@ com\ditto\config\FastJsonRedisSerializer.class
 com\ditto\utils\PathUtils.class
 com\ditto\service\impl\UploadServiceImpl.class
 com\ditto\vo\ResultVo.class
+com\ditto\domain\entity\Tag.class
 com\ditto\domain\entity\LoginUser.class
+com\ditto\mapper\TagMapper.class
 com\ditto\service\impl\BlogLoginServiceImpl.class
 com\ditto\domain\vo\BlogUserLoginVo.class
 com\ditto\exception\SystemException.class
@@ -19,6 +21,7 @@ com\ditto\enums\AppHttpCodeEnum.class
 com\ditto\mapper\LinkMapper.class
 com\ditto\domain\vo\LinkVo.class
 com\ditto\domain\vo\ArticleListVo.class
+com\ditto\service\impl\TagServiceImpl.class
 com\ditto\config\WebConfig.class
 com\ditto\service\impl\UserDetailsServiceImpl.class
 com\ditto\handler\security\AuthenticationEntryPointImpl.class
@@ -42,6 +45,7 @@ com\ditto\service\UserService.class
 com\ditto\domain\vo\PageVo.class
 com\ditto\service\impl\UserServiceImpl.class
 com\ditto\service\CommentService.class
+com\ditto\service\TagService.class
 com\ditto\utils\BeanCopyUtils.class
 com\ditto\service\BlogLoginService.class
 com\ditto\utils\WebUtils.class
