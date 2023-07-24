@@ -16,6 +16,7 @@ public class LinkController {
     @GetMapping("/getAllLink")
     public ResponseResult<?> getAllLink() {
         System.out.println("test");
+        System.out.println("test2");
        return linkService.getAllLink();
     }
 }
